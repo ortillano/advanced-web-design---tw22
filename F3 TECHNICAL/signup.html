@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scentsitivity | Sign Up</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>
+        <img src="assets/logo.png" alt="Scentsitivity Logo" class="logo" />
+        <h1>Scentsitivity</h1>
+    </header>
+
+    <div class="container">
+        <nav class="sidebar">
+            <a href="index.html">Home</a>
+            <a href="aboutus.html">About</a>
+            <a href="contactus.html">Contact Us</a>
+            <a href="products.html">Product Catalog</a>
+            <a href="cart.html">Your Cart</a>
+        </nav>
+
+        <main class="login-section">
+            <form id="signupForm">
+                <input type="text" id="firstName" placeholder="First Name" required />
+                <input type="text" id="lastName" placeholder="Last Name" required />
+                <input type="email" id="email" placeholder="Email Address" required />
+                <input type="password" id="password" placeholder="Password" required />
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+                <input type="tel" id="mobile" placeholder="Mobile Number" required />
+                <input type="text" id="address" placeholder="Home Address" required />
+                <button type="submit">Sign Up</button>
+            </form>
+
+            <p>
+                <a href="login.html" class="sidebar-link">
+                    Already have an account? Log in
+                </a>
+            </p>
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2026 Scentsitivity. All rights reserved.</p>
+        <p>Email: scent_sensitivity@gmail.com | Phone: 0129393</p>
+    </footer>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const mobile = document.getElementById('mobile').value;
+            const address = document.getElementById('address').value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords don't match!");
+                return;
+            }
+
+            alert(`Account created for ${firstName} ${lastName} (placeholder)`);
+
+            window.location.href = 'profile.html';
+        });
+    </script>
+</body>
+</html>

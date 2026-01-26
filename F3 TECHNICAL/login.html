@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scentsitivity | Login</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>
+        <img src="assets/logo.png" alt="Scentsitivity Logo" class="logo" />
+        <h1>Scentsitivity</h1>
+    </header>
+
+    <div class="container">
+        <nav class="sidebar">
+            <a href="index.html">Home</a>
+            <a href="aboutus.html">About</a>
+            <a href="contactus.html">Contact Us</a>
+            <a href="products.html">Product Catalog</a>
+            <a href="cart.html">Your Cart</a>
+        </nav>
+
+        <main class="login-section">
+            <form id="loginForm">
+                <label for="loginEmail">Email Address</label>
+                <input type="email" id="loginEmail" placeholder="Email Address" required />
+
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="Password" required />
+
+                <button type="submit">Login</button>
+            </form>
+
+            <p>
+                <a href="signup.html" class="sidebar-link">
+                    Don't have an account? Sign up here
+                </a>
+            </p>
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2026 Scentsitivity. All rights reserved.</p>
+        <p>Email: scent_sitivity@gmail.com | Phone: 0129393</p>
+    </footer>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('loginEmail').value;
+
+            alert(`Logged in as ${email} (placeholder)`);
+
+            window.location.href = 'profile.html';
+        });
+    </script>
+</body>
+</html>
