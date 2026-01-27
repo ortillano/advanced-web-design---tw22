@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scentsitivity | Checkout</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="assets/logo.png" alt="Company Logo" class="logo">
+        <h1>Scentsitivity</h1>
+    </header>
+
+    <div class="container">
+        <nav class="sidebar">
+            <a href="index.html">Home</a>
+            <a href="aboutus.html">About</a>
+            <a href="contactus.html">About</a>
+            <a href="products.html">Products</a>
+            <a href="cart.html">Your Cart</a>
+        </nav>
+
+        <main class="content">
+            <h2>Checkout</h2>
+
+            <form id="checkoutForm">
+                <label for="payment">Payment Method</label>
+                <select id="payment" required>
+                    <option value="">-- Select Payment Method --</option>
+                    <option value="gcash">GCash</option>
+                    <option value="credit">Credit Card</option>
+                    <option value="cod">Cash on Delivery</option>
+                </select>
+
+         
+                <label for="delivery">Delivery Method</label>
+                <select id="delivery" required>
+                    <option value="">-- Select Delivery Method --</option>
+                    <option value="standard">Standard Delivery</option>
+                    <option value="express">Express Delivery</option>
+                    <option value="pickup">Store Pickup</option>
+                </select>
+
+                <button type="submit">Confirm Order</button>
+            </form>
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2026 Scentsitivity. All rights reserved.</p>
+        <p>Email: scent_sitivity@gmail.com | Phone: 0129393</p>
+    </footer>
+
+    <script>
+        document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const payment = document.getElementById('payment').value;
+            const delivery = document.getElementById('delivery').value;
+
+            if (!payment || !delivery) {
+                alert('Please select payment and delivery method.');
+                return;
+            }
+
+            alert(`Payment: ${payment}\nDelivery: ${delivery}\n(Placeholder only)`);
+
+            window.location.href = 'transaction.html';
+        });
+    </script>
+</body>
+</html>
