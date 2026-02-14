@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scentsitivity | Order Confirmation</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <img src="assets/logo.png" alt="Scentsitivity Logo" class="logo">
+            <h1>Scentsitivity</h1>
+        </header>
+
+        <div class="container">
+            <aside class="sidebar">
+                <nav>
+                    <a href="index.html" class="sidebar-link">Home</a>
+                    <a href="aboutus.html" class="sidebar-link">About</a>
+                    <a href="contactus.html" class="sidebar-link">Contact Us</a>
+                    <a href="products.html" class="sidebar-link">Products</a>
+                    <a href="cart.html" class="sidebar-link">Your Cart ({{ cartCount }})</a>
+                </nav>
+                <div v-if="!isLoggedIn" style="margin-top: 40px;">
+                    <a href="login.html" class="sidebar-link">Login</a>
+                    <a href="signup.html" class="sidebar-link">Sign Up</a>
+                </div>
+                <div v-else style="margin-top: 40px;">
+                    <a href="profile.html" class="sidebar-link">Profile</a>
+                    <a href="#" @click.prevent="logout" class="sidebar-link">Logout</a>
+                </div>
+            </aside>
+
+            <main class="content">
+                <div style="text-align: center;">
+                    <h2>Thank you for your purchase!</h2>
+                    <div style="background-color: white; padding: 20px; border: 2px solid #494406; max-width: 400px; margin: 20px auto;">
+                        <p><strong>Status:</strong> Order Confirmed</p>
+                        <p><strong>Payment:</strong> {{ orderDetails.payment }}</p>
+                        <p><strong>Delivery:</strong> {{ orderDetails.delivery }}</p>
+                        <p><strong>Total:</strong> ₱{{ orderDetails.total }}</p>
+                    </div>
+                    <a href="products.html" class="submit-btn" style="margin-top: 20px; display: inline-block;">Continue Shopping</a>
+                </div>
+            </main>
+        </div>
+
+        <footer>
+            <p>© 2026 Scentsitivity. All rights reserved.</p>
+            <p>Email: scent_sensitivity@gmail.com | Phone: 0129393</p>
+        </footer>
+    </div>
+
+    <script>
+        const { createApp, ref, computed } = Vue
+
+        const app = createApp({
+            setup() {
+                const cart = ref(JSON.parse(localStorage.getItem('cart')) || [])
+                const user = ref(JSON.parse(localStorage.getItem('user')) || null)
+
+                const orderDetails = ref(JSON.parse(localStorage.getItem('lastOrder')) || {
+                    payment: 'N/A',
+                    delivery: 'N/A',
+                    total: 0
+                })
+
+                const cartCount = computed(() => 
+                    cart.value.reduce((total, item) => total + item.quantity, 0)
+                )
+                const isLoggedIn = computed(() => !!user.value)
+
+                const logout = () => {
+                    user.value = null
+                    localStorage.removeItem('user')
+                    window.location.href = 'login.html'
+                }
+
+                return {
+                    orderDetails,
+                    cartCount,
+                    isLoggedIn,
+                    logout
+                }
+            }
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+</html>

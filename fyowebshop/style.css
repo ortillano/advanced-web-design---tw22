@@ -1,0 +1,174 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.logo {
+    width: 80px;
+}
+
+header {
+    background-color: #ffffff;
+    color:#b38600ff;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    width: 100vw;
+    min-height: 80vh;
+}
+
+
+.sidebar {
+   width: 160px; 
+    background-color: #ffffe6;
+    padding: 20px; 
+    flex-shrink: 0; 
+}
+
+.sidebar a {
+    display: block;
+    margin-bottom: 20px;
+    text-decoration:underline;
+    color: #b38600;
+}
+
+nav a:hover {
+    color:brown;
+}
+
+.sidebar-link {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: underline;
+    color: #b38600;
+    font-weight: normal;
+}
+
+.sidebar-link:hover {
+    color: brown;
+}
+
+
+main.content{ 
+    flex: 1;
+    background: #BDB76B;
+    padding: 20px;
+    margin: 0;
+    
+}
+
+main {
+    color: #494406;
+}
+
+
+footer {
+   width: 100%; 
+    background: #ffebbd;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.products {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;       
+    gap: 30px;           
+    padding: 30px;       
+    justify-content: flex-start; 
+    align-items: flex-start;
+}
+
+.product {
+    border: 1px solid #494406;
+    background-color: beige;
+    padding: 20px;
+    width: 150px;
+    height: 150px;
+}
+
+.features {
+
+    border: 3px solid #494406;
+    padding: 20px;
+    width: 150px;
+    height: 150px;
+    align-items: flex-start;
+    background-color:beige
+   
+}
+
+.featured {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;       
+    gap: 30px;           
+    padding: 30px;       
+    justify-content: flex-start; 
+    align-items: flex-start;
+}
+
+.content {
+    border: 1px solid #494406;
+    padding: 20px;
+}
+
+.profile-card {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.payment-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    text-align: center;
+    padding: 40px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+select {
+    padding: 10px;
+    width: 250px;
+    border: 2px solid #494406;
+    background-color: #ffffe6; 
+    color: #494406;
+    font-size: 16px;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+label {
+    font-weight: bold;
+    color: #494406;
+}
+
+.submit-btn {
+    background-color: #b38600; 
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border: 1px solid #494406;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    background-color: brown;
+}
