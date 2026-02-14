@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scentsitivity | Cart</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <img src="assets/logo.png" alt="Scentsitivity Logo" class="logo">
+            <h1>Scentsitivity</h1>
+        </header>
+
+        <div class="container">
+            <aside class="sidebar">
+                <nav>
+                    <a href="index.html" class="sidebar-link">Home</a>
+                    <a href="aboutus.html" class="sidebar-link">About</a>
+                    <a href="contactus.html" class="sidebar-link">Contact Us</a>
+                    <a href="products.html" class="sidebar-link">Products</a>
+                    <a href="cart.html" class="sidebar-link">Your Cart ({{ cartCount }})</a>
+                </nav>
+                <div v-if="!isLoggedIn" style="margin-top: 40px;">
+                    <a href="login.html" class="sidebar-link">Login</a>
+                    <a href="signup.html" class="sidebar-link">Sign Up</a>
+                </div>
+                <div v-else style="margin-top: 40px;">
+                    <a href="profile.html" class="sidebar-link">Profile</a>
+                    <a href="#" @click.prevent="logout" class="sidebar-link">Logout</a>
+                </div>
+            </aside>
+
+            <main class="content">
+                <h2>Your Cart</h2>
+                <p><strong>Your Total: ₱{{ totalAmount }}</strong></p>
+                <div v-if="cartItems.length === 0" class="content">
+                    <p>Your cart is empty!</p>
+                </div>
+                <div v-else>
+                    <div v-for="item in cartItems" :key="item.id" class="product">
+                        <h3>{{ item.name }}</h3>
+                        <p>{{ item.description }}</p>
+                        <p>Quantity: {{ item.quantity }}</p>
+                        <button @click="removeFromCart(item.id)" style="background-color: #ff6b6b;">Remove</button>
+                    </div>
+                    <br>
+                    <a href="payndel.html" class="submit-btn">Checkout</a>
+                </div>
+            </main>
+        </div>
+
+        <footer>
+            <p>© 2026 Scentsitivity. All rights reserved.</p>
+            <p>Email: scent_sensitivity@gmail.com | Phone: 0129393</p>
+        </footer>
+    </div>
+
+    <script>
+        const { createApp, ref, computed } = Vue
+
+        const app = createApp({
+            setup() {
+                const cart = ref(JSON.parse(localStorage.getItem('cart')) || [])
+                const user = ref(JSON.parse(localStorage.getItem('user')) || null)
+
+                const cartItems = computed(() => cart.value)
+                const cartCount = computed(() => 
+                    cart.value.reduce((total, item) => total + item.quantity, 0)
+                )
+                const totalAmount = computed(() => 
+                    cart.value.reduce((total, item) => total + (item.price * item.quantity), 0)
+                )
+                const isLoggedIn = computed(() => !!user.value)
+
+                const removeFromCart = (id) => {
+                    cart.value = cart.value.filter(item => item.id !== id)
+                    localStorage.setItem('cart', JSON.stringify(cart.value))
+                }
+
+                const logout = () => {
+                    user.value = null
+                    localStorage.removeItem('user')
+                    window.location.href = 'login.html'
+                }
+
+                return {
+                    cartItems,
+                    cartCount,
+                    totalAmount,
+                    isLoggedIn,
+                    removeFromCart,
+                    logout
+                }
+            }
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+</html>

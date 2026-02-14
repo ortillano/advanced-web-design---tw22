@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scentsitivity | Login</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <img src="assets/logo.png" alt="Scentsitivity Logo" class="logo">
+            <h1>Scentsitivity</h1>
+        </header>
+
+        <div class="container">
+            <aside class="sidebar">
+                <nav>
+                    <a href="index.html" class="sidebar-link">Home</a>
+                    <a href="aboutus.html" class="sidebar-link">About</a>
+                    <a href="contactus.html" class="sidebar-link">Contact Us</a>
+                    <a href="products.html" class="sidebar-link">Products</a>
+                    <a href="cart.html" class="sidebar-link">Your Cart ({{ cartCount }})</a>
+                </nav>
+                <div v-if="!isLoggedIn" style="margin-top: 40px;">
+                    <a href="login.html" class="sidebar-link">Login</a>
+                    <a href="signup.html" class="sidebar-link">Sign Up</a>
+                </div>
+                <div v-else style="margin-top: 40px;">
+                    <a href="profile.html" class="sidebar-link">Profile</a>
+                    <a href="#" @click.prevent="logout" class="sidebar-link">Logout</a>
+                </div>
+            </aside>
+
+            <main class="content">
+                <div style="max-width: 400px; margin: 0 auto;">
+                    <h2>Login</h2>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input v-model="email" type="email" style="padding: 10px; width: 100%; margin-top: 8px;">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input v-model="password" type="password" style="padding: 10px; width: 100%; margin-top: 8px;">
+                    </div>
+                    <button @click="login" class="submit-btn" style="width: 100%;">Login</button>
+                    <p style="text-align: center; margin-top: 20px;">
+                        Don't have an account? <a href="signup.html" style="color: #b38600; text-decoration: underline;">Sign up here</a>
+                    </p>
+                </div>
+            </main>
+        </div>
+
+        <footer>
+            <p>© 2026 Scentsitivity. All rights reserved.</p>
+            <p>Email: scent_sensitivity@gmail.com | Phone: 0129393</p>
+        </footer>
+    </div>
+
+    <script>
+        const { createApp, ref, computed } = Vue
+
+        const app = createApp({
+            setup() {
+                const cart = ref(JSON.parse(localStorage.getItem('cart')) || [])
+                const users = ref(JSON.parse(localStorage.getItem('users')) || [])
+                const user = ref(JSON.parse(localStorage.getItem('user')) || null)
+
+                const email = ref('')
+                const password = ref('')
+
+                const cartCount = computed(() => 
+                    cart.value.reduce((total, item) => total + item.quantity, 0)
+                )
+                const isLoggedIn = computed(() => !!user.value)
+
+                const login = () => {
+                    const foundUser = users.value.find(u => u.email === email.value && u.password === password.value)
+                    if (foundUser) {
+                        user.value = foundUser
+                        localStorage.setItem('user', JSON.stringify(foundUser))
+                        alert('Login successful!')
+                        window.location.href = 'index.html'
+                    } else {
+                        alert('Invalid email or password!')
+                    }
+                }
+
+                const logout = () => {
+                    user.value = null
+                    localStorage.removeItem('user')
+                    window.location.href = 'login.html'
+                }
+
+                return {
+                    email,
+                    password,
+                    cartCount,
+                    isLoggedIn,
+                    login,
+                    logout
+                }
+            }
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+</html>
